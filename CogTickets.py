@@ -22,9 +22,8 @@ class CogTickets(commands.Cog):
                 await self.add_ticket(ticket_author, ticket_content)
             case 'list':
                 await CogTickets.get_ticket_list(ticket_author)
-            case _:
-                print(action)
-
+            case 'git':
+                await CogTickets.git(ctx.author)
         return
 
     async def annouce_result(self, ticket_id):
@@ -48,12 +47,12 @@ class CogTickets(commands.Cog):
 
         await self.bot.get_channel(close_channel).send(embed=embed)
 
-    @commands.command()
-    async def git(self, ctx):
+    @staticmethod
+    async def git(author):
         embed = discord.Embed(title="**Git of Tiketator**", colour=0x595959)
-        embed.add_field(name='', value='Please follow the rules:')
-        
-        await ctx.send(embed=embed)
+        embed.add_field(name='', value='https://github.com/LilianBoinard/Tiketator')
+
+        await author.send(embed=embed)
 
     async def announce_open_ticket(self, ticket_id):
 
