@@ -56,6 +56,8 @@ class CogTickets(commands.Cog):
 
     async def announce_open_ticket(self, ticket_id):
 
+        vote_duration = 3600
+
         tickets = TicketsJSON.get_tickets_json()
         open_channel = int(os.getenv('open_channel'))
 
@@ -67,7 +69,7 @@ class CogTickets(commands.Cog):
 
         message = await self.bot.get_channel(open_channel).send(embed=embed)
 
-        await asyncio.sleep(5)
+        await asyncio.sleep(vote_duration)
 
         cache_msg = discord.utils.get(self.bot.cached_messages, id=message.id)
 
